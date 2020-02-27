@@ -8,8 +8,7 @@ function wait_for_completion() {
     c=0
     printf "Waiting until write will be completed "
     until [ -n "$response" ]; do
-        response=$(curl -s --url $AKUMULI_ENDPOINT:8181/api/query -d "{ \"select\": \"temperature_celsius\", \"where\" : { \"sensor_id\": \"$1\" }, \"range\": { \"from\": \"20190101T235800.000000\", \"to\": \"20200101T000000.000000\" }}")
-        #response=$(curl -s --url $AKUMULI_ENDPOINT:8181/api/query -d "{ \"select\": \"temperature_celsius\", \"where\" : { \"sensor_id\": \"$1\" }, \"range\": { \"from\": \"20191231T235800.000000\", \"to\": \"20200101T000000.000000\" }}")
+        response=$(curl -s --url $AKUMULI_ENDPOINT:8181/api/query -d "{ \"select\": \"temperature_celsius\", \"where\" : { \"sensor_id\": \"$1\" }, \"range\": { \"from\": \"20191231T235800.000000\", \"to\": \"20200101T000000.000000\" }}")
         printf '.'
         sleep 1
         ((c++)) && ((c==20)) && break
