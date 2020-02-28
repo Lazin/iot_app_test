@@ -8,7 +8,7 @@ function wait_for_completion() {
     c=0
     printf "Waiting until write will be completed "
     until [ -n "$response" ]; do
-        response=$(curl -s --url $AKUMULI_ENDPOINT:8181/api/query -d "{ \"select\": \"temperature_celsius\", \"where\" : { \"sensor_id\": \"$1\" }, \"range\": { \"from\": \"20191231T235800.000000\", \"to\": \"20200101T000000.000000\" }}")
+        response=$(curl -s --url $AKUMULI_ENDPOINT:8181/api/query -d "{ \"select\": \"temp0\", \"where\" : { \"sensor_id\": \"$1\" }, \"range\": { \"from\": \"20191231T235800.000000\", \"to\": \"20200101T000000.000000\" }}")
         printf '.'
         sleep 1
         ((c++)) && ((c==20)) && break
@@ -34,80 +34,68 @@ wait
 timestamp=$(date +%Y%m%dT%H%M%S)
 echo "Wait for completion @ $timestamp"
  
-wait_for_completion "sensor_124999"
-wait_for_completion "sensor_249999"
-wait_for_completion "sensor_374999"
-wait_for_completion "sensor_499999"
-wait_for_completion "sensor_624999"
-wait_for_completion "sensor_749999"
-wait_for_completion "sensor_874999"
-wait_for_completion "sensor_999999"
+wait_for_completion "sensor_12499"
+wait_for_completion "sensor_24999"
+wait_for_completion "sensor_37499"
+wait_for_completion "sensor_49999"
+wait_for_completion "sensor_62499"
+wait_for_completion "sensor_74999"
+wait_for_completion "sensor_87499"
+wait_for_completion "sensor_99999"
 
 timestamp=$(date +%Y%m%dT%H%M%S)
 echo "Completed @ $timestamp"
-
-# Aggregate everything using one thread
-sleep 600
-timestamp=$(date +%Y%m%dT%H%M%S)
-
-echo "Run aggregate query 1-thread @ $timestamp"
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temperature_celsius": "max" } }' | wc -c
-wait
-
-timestamp=$(date +%Y%m%dT%H%M%S)
-echo "Completed @ $timestamp"
-
 sleep 600
 
-# Aggregate everything using all threads
+# Aggregate using one thread
 timestamp=$(date +%Y%m%dT%H%M%S)
-
-echo "Run aggregate query 1-thread @ $timestamp"
-
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"0"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"1"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"2"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"3"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"4"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"5"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"6"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"7"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"8"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"9"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"10"}, { "temperature_celsius": "max" } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": "where": {"group":"11"}, { "temperature_celsius": "max" } }' | wc -c
+echo "Run aggregate query in one thread @ $timestamp"
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp0": "max" } }' | wc -c
 wait
-
 timestamp=$(date +%Y%m%dT%H%M%S)
 echo "Completed @ $timestamp"
-
 sleep 600
 
 # Filter by value 1 thread
 timestamp=$(date +%Y%m%dT%H%M%S)
-echo "Run filter query @ $timestamp"
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
+echo "Run filter query in one thread @ $timestamp"
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp0", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c
 timestamp=$(date +%Y%m%dT%H%M%S)
 echo "Completed @ $timestamp"
-
 sleep 600
 
-# Filter by value all threads
+# Aggregate using 10 threads
 timestamp=$(date +%Y%m%dT%H%M%S)
-echo "Run filter query @ $timestamp"
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "0" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "1" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "2" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "3" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "4" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "5" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "6" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "7" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "8" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "9" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "10" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
-time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temperature_celsius", "where": { "group": "11" }, "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "gt": 10000 } }' | wc -c
+echo "Run aggregate query in 10 threads @ $timestamp"
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp0": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp1": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp2": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp3": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp4": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp5": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp6": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp7": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp8": "max" } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "aggregate": { "temp9": "max" } }' | wc -c &
 wait
 timestamp=$(date +%Y%m%dT%H%M%S)
 echo "Completed @ $timestamp"
+sleep 600
 
+# Filter by value 10 threads
+timestamp=$(date +%Y%m%dT%H%M%S)
+echo "Run filter query in 10 threads @ $timestamp"
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp0", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp1", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp2", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp3", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp4", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp5", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp6", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp7", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp8", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+time curl -s -XPOST "http://$AKUMULI_ENDPOINT:8181/api/query" -d '{ "select": "temp9", "range": {"from": "20010101T000000", "to": "20300101T000000"}, "order-by": "series", "filter": { "lt": 0 } }' | wc -c &
+wait
+timestamp=$(date +%Y%m%dT%H%M%S)
+echo "Completed @ $timestamp"
+sleep 600

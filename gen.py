@@ -16,37 +16,52 @@ def parse_timedelta(delta):
     t = datetime.datetime.strptime(delta,"%H:%M:%S")
     return datetime.timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
 
-def bulk_msg_with_dict(ts, id, val):
-    ncol = 1
+def bulk_msg_with_dict(ts, id, values, ncol):
     sname = ":" + str(id)
     timestr = ts.strftime('+%Y%m%dT%H%M%S')
-    lines = [sname, timestr, "+{0}".format(val)]
+    header = "*{0}".format(ncol)
+    lines = [sname, timestr, header]
+    for i, val in enumerate(values):
+        lines.append("+{0}".format(val))
     return '\r\n'.join(lines) + '\r\n'
 
-def generate_rows_dict(ts, delta, id):
-    val = 21.5  # Starting temperature
-    out = None
+def generate_rows_dict(ts, delta, id, ncol):
+    row = [21.5] * ncol
+    out = list(row)
     upper = 35  # Normal temperature range
     lower = 19
     while True:
-        val += random.gauss(0.0, 0.1)
-        val = val if val > lower else lower
-        val = val if val < upper else lower
-        out = int(val)
-        msg = bulk_msg_with_dict(ts, id, out)
+        for i in xrange(0, ncol):
+            row[i] += random.gauss(0.0, 0.05)
+            row[i] = row[i] if row[i] > lower else lower
+            row[i] = row[i] if row[i] < upper else lower
+            out[i] = int(row[i])
+        msg = bulk_msg_with_dict(ts, id, out, ncol)
         yield ts, msg
         ts += delta
 
-
-def generate_rows_dict_anomalous(ts, delta, id):
-    val = 21.5  # Starting temperature
-    out = None
+def generate_rows_dict_anomalous(ts, delta, id, ncol):
+    row = [21.5] * ncol
+    out = list(row)
+    upper = 100  # Anomalous temperature range
+    lower = -99
     while True:
-        val += random.gauss(0.0, 1.0)
-        out = int(val)
-        msg = bulk_msg_with_dict(ts, id, out)
+        for i in xrange(0, ncol):
+            row[i] += random.gauss(1.0, 5.0)
+            row[i] = row[i] if row[i] > lower else lower
+            row[i] = row[i] if row[i] < upper else lower
+            out[i] = int(row[i])
+        msg = bulk_msg_with_dict(ts, id, out, ncol)
         yield ts, msg
         ts += delta
+
+def generate_rr(iters):
+    N = len(iters)
+    ix = 0
+    while True:
+        it = iters[ix % N]
+        yield it.next()
+        ix += 1
 
 def main(idrange, timerange, seed):
 
@@ -56,6 +71,16 @@ def main(idrange, timerange, seed):
     idbegin, idend = idrange
 
     measurements = [
+        "temp0",
+        "temp1",
+        "temp2",
+        "temp3",
+        "temp4",
+        "temp5",
+        "temp6",
+        "temp7",
+        "temp8",
+        "temp9",
     ]
 
     tag_combinations = {
@@ -77,7 +102,7 @@ def main(idrange, timerange, seed):
     # Generate dictionary
     ids = []
     for ix, tagline in enumerate(tags):
-        metric = 'temperature_celsius'
+        metric = "|".join(measurements)
         sname = metric + ' ' + ' '.join(['{0}={1}'.format(key, val) for key, val in tagline])
         #
         msg = "*2\r\n+{0}\r\n:{1}\r\n".format(sname, ix)
@@ -85,17 +110,20 @@ def main(idrange, timerange, seed):
         sys.stdout.write(msg)
 
     # Choose 100 series randomly
-    anomalies = random.sample(ids, 100)
+    if len(ids) > 100:
+        anomalies = random.sample(ids, 100)
+    else:
+        anomalies = []
     iters = []
     for id_ in ids:
-        if id_ in anomalies:
-            iters.append(generate_rows_dict_anomalous(begin, delta, id_))
+        if id_ not in anomalies:
+            iters.append(generate_rows_dict_anomalous(begin, delta, id_, 10))
         else:
-            iters.append(generate_rows_dict(begin, delta, id_))
+            iters.append(generate_rows_dict(begin, delta, id_, 10))
 
     for it in iters:
         for ts, msg in it:
-            if ts > end:
+            if ts >= end:
                 break
             sys.stdout.write(msg)
 
