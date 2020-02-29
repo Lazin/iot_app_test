@@ -116,7 +116,7 @@ def main(idrange, timerange, seed):
         anomalies = []
     iters = []
     for id_ in ids:
-        if id_ not in anomalies:
+        if id_ in anomalies:
             iters.append(generate_rows_dict_anomalous(begin, delta, id_, 10))
         else:
             iters.append(generate_rows_dict(begin, delta, id_, 10))
