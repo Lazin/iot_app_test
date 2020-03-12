@@ -1,0 +1,2065 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
+        "name": "Annotations & Alerts",
+        "showIn": 0,
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "DO droplet dashboard",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1583997527312,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "panels": [],
+      "title": "CPU - RAM",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "user",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.cpu.user",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "system",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.cpu.system",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "iowait",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.cpu.iowait",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "used",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.ram.used",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "buffers",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.ram.buffers",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "cached",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.ram.cached",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Mem",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decmbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 16,
+      "panels": [],
+      "title": "Disk",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "writes completed",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_ops.vda.writes",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "reads completed",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_ops.vda.reads",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk iops",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "writes",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk.vda.writes",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "reads",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk.vda.reads",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk bandwidth",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Kbits",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 30,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "used",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "max",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_space._.used",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "available",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "min",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_space._.avail",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "reserved for root",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "min",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_space._.reserved_for_root",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk space",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decgbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 31,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "utilization",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.disk_util.vda.utilization",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 20,
+      "panels": [],
+      "title": "Network",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "sent",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.net.sent",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "received",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.net.received",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Bandwidth",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Kbits",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "inqueue",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpofo.inqueue",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "pruned",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpofo.pruned",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "dropped",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpofo.dropped",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "merged",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpofo.merged",
+          "refId": "D",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "fack",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.fack",
+          "refId": "E",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "timestamp",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.timestamp",
+          "refId": "F",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "sack",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.sack",
+          "refId": "G",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "reno",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.reno",
+          "refId": "H",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP out of order",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
+      "id": 23,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "fack",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.fack",
+          "refId": "E",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "timestamp",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.timestamp",
+          "refId": "F",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "sack",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.sack",
+          "refId": "G",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "reno",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ip.tcpreorders.reno",
+          "refId": "H",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP reorders",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "hiddenSeries": false,
+      "id": 29,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "packets received",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ipv4.tcppackets.received",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "packets sent",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ipv4.tcppackets.sent",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "retrans segments",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ipv4.tcperrors.RetransSegs",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "errors",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ipv4.tcperrors.InErrs",
+          "refId": "D",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "checksum errors",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.ipv4.tcperrors.InCsumErrors",
+          "refId": "E",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "IPv4",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 44
+      },
+      "id": 25,
+      "panels": [],
+      "title": "Interrupts",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 45
+      },
+      "hiddenSeries": false,
+      "id": 27,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "TLB",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.interrupts.TLB",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "remote-func-call",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.interrupts.CAL",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "LOC",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.interrupts.LOC",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "rescheduling",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.interrupts.RES",
+          "refId": "D",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Interrupts",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 45
+      },
+      "hiddenSeries": false,
+      "id": 28,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "NET_RX",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.NET_RX",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "NET_TX",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.NET_TX",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "HI",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.HI",
+          "refId": "C",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "SCHED",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.SCHED",
+          "refId": "D",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "TASKLET",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.TASKLET",
+          "refId": "E",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "TIMER",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.TIMER",
+          "refId": "F",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "RCU",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "sum",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.system.softirqs.RCU",
+          "refId": "G",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "SoftIRQs",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 53
+      },
+      "id": 18,
+      "panels": [],
+      "title": "Akumuli",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 54
+      },
+      "hiddenSeries": false,
+      "id": 9,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "cpu.user",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.cpu_user.timedb",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "cpu.system",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.cpu_system.timedb",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Akumuli CPU",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 54
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "mem",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.mem.timedb",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "swap",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.swap.timedb",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Akumuli mem",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decmbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$Datasource",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 62
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "sum",
+          "alias": "read",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.preads.timedb",
+          "refId": "A",
+          "tags": {
+            "host": "$host"
+          }
+        },
+        {
+          "aggregator": "sum",
+          "alias": "write",
+          "currentTagKey": "",
+          "currentTagValue": "",
+          "downsampleAggregator": "mean",
+          "downsampleFillPolicy": "none",
+          "metric": "netdata.apps.pwrites.timedb",
+          "refId": "B",
+          "tags": {
+            "host": "$host"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Akumuli disk I/O",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "kbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "ubuntu-s-12vcpu-48gb-lon1-01",
+          "value": "ubuntu-s-12vcpu-48gb-lon1-01"
+        },
+        "datasource": "Akumuli",
+        "definition": "netdata.system.cpu.user host",
+        "hide": 0,
+        "includeAll": false,
+        "label": "host",
+        "multi": false,
+        "name": "host",
+        "options": [
+          {
+            "selected": true,
+            "text": "ubuntu-s-12vcpu-48gb-lon1-01",
+            "value": "ubuntu-s-12vcpu-48gb-lon1-01"
+          },
+          {
+            "selected": false,
+            "text": "ubuntu-s-1vcpu-2gb-lon1-01",
+            "value": "ubuntu-s-1vcpu-2gb-lon1-01"
+          },
+          {
+            "selected": false,
+            "text": "ubuntu-s-8vcpu-32gb-lon1-01",
+            "value": "ubuntu-s-8vcpu-32gb-lon1-01"
+          }
+        ],
+        "query": "",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "text": "Akumuli",
+          "value": "Akumuli"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Datasource",
+        "options": [],
+        "query": "akumuli-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "utc",
+  "title": "Droplet",
+  "uid": "rhgpQCUWz",
+  "version": 30
+}
